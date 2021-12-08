@@ -2,7 +2,7 @@ import SwiftUI
 import LinkPresentation
 
 public struct LinkPreview: View {
-    let url: URL
+    let url: URL?
     
     @State private var isPresented: Bool = false
     @State private var metaData: LPLinkMetadata? = nil
@@ -12,52 +12,53 @@ public struct LinkPreview: View {
     var secondaryFontColor: Color = .gray
     var titleLineLimit: Int = 3
     
-    public init(url: URL) {
+    public init(url: URL?) {
         self.url = url
     }
     
-   public var body: some View {
-        
-        if let metaData = metaData {
-            Button(action: {
-                if UIApplication.shared.canOpenURL(url) {
-                    self.isPresented.toggle()
+    public var body: some View {
+        if let url = url {
+            if let metaData = metaData {
+                Button(action: {
+                    if UIApplication.shared.canOpenURL(url) {
+                        self.isPresented.toggle()
+                    }
+                }, label: {
+                    LinkPreviewDesign(metaData: metaData, type: .auto, backgroundColor: backgroundColor, primaryFontColor: primaryFontColor, secondaryFontColor: secondaryFontColor, titleLineLimit: titleLineLimit)
+                })
+                    .buttonStyle(LinkButton())
+                    .fullScreenCover(isPresented: $isPresented) {
+                        SfSafariView(url: url)
+                            .edgesIgnoringSafeArea(.all)
+                    }
+                    .animation(.spring(), value: metaData)
+            }
+            else {
+                HStack(spacing: 10){
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .gray))
+                    
+                    Text(url.host ?? "")
+                        .font(.caption)
                 }
-            }, label: {
-                LinkPreviewDesign(metaData: metaData, type: .auto, backgroundColor: backgroundColor, primaryFontColor: primaryFontColor, secondaryFontColor: secondaryFontColor, titleLineLimit: titleLineLimit)
-            })
-                .buttonStyle(LinkButton())
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .background(
+                    Capsule()
+                        .foregroundColor(Color(.systemGray5))
+                )
+                .onAppear(perform: {
+                    getMetaData(url: url)
+                })
+                .onTapGesture {
+                    if UIApplication.shared.canOpenURL(url) {
+                        self.isPresented.toggle()
+                    }
+                }
                 .fullScreenCover(isPresented: $isPresented) {
                     SfSafariView(url: url)
                         .edgesIgnoringSafeArea(.all)
                 }
-                .animation(.spring(), value: metaData)
-        }
-        else {
-            HStack(spacing: 10){
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: .gray))
-                
-                Text(self.url.host ?? "")
-                    .font(.caption)
-            }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 6)
-            .background(
-                Capsule()
-                    .foregroundColor(Color(.systemGray5))
-            )
-            .onAppear(perform: {
-                getMetaData(url: self.url)
-            })
-            .onTapGesture {
-                if UIApplication.shared.canOpenURL(url) {
-                    self.isPresented.toggle()
-                }
-            }
-            .fullScreenCover(isPresented: $isPresented) {
-                SfSafariView(url: url)
-                    .edgesIgnoringSafeArea(.all)
             }
         }
     }
