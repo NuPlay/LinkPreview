@@ -15,7 +15,7 @@
 <h3 align="center"> Preview with Link's meta information. </h3>
 
 
-| ![IMG_0458](https://user-images.githubusercontent.com/73557895/145138507-d5b540b5-1e16-4363-a125-f70b854af3a5.jpg) 	| ![example](https://user-images.githubusercontent.com/73557895/145139131-60038507-92ea-4ab0-9b8e-9a9b7cc7b9ac.gif) 	|
+| ![IMG_0458](https://user-images.githubusercontent.com/73557895/145139791-93841950-02da-423b-8b4e-da1764073bd6.png) 	| ![example](https://user-images.githubusercontent.com/73557895/145139131-60038507-92ea-4ab0-9b8e-9a9b7cc7b9ac.gif) 	|
 |--------------------------------------------------------------------------------------------------------------------	|-------------------------------------------------------------------------------------------------------------------	|
 | Image                                                                                                              	| Gif                                                                                                               	|
 
