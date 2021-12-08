@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Xcode
+DerivedData/
+build/
+*.xcuserstate
+xcuserdata/
+**/xcuserdata/
+
+# Xcode schemes user state
+xcschememanagement.plist
