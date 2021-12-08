@@ -51,32 +51,46 @@ struct LinkPreviewDesign: View {
     @ViewBuilder
     var smallType: some View {
         HStack(spacing: 8){
-            Image(systemName: "arrow.up.forward.app.fill")
-                .resizable()
-                .foregroundColor(.gray)
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 24, height: 24, alignment: .center)
-            
             VStack(alignment: .leading, spacing: 0){
                 if let title = metaData.title {
                     Text(title)
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .multilineTextAlignment(.leading)
+                        .foregroundColor(primaryFontColor)
+                        .lineLimit(titleLineLimit)
                 }
                 
                 if let url = metaData.url?.host {
                     Text("\(url)")
-                        .foregroundColor(.gray)
+                        .foregroundColor(secondaryFontColor)
                         .font(.footnote)
                 }
+            }
+            
+            if let img = image {
+                Image(uiImage: img)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 32, height: 32, alignment: .center)
+                    .clipped()
+                    .cornerRadius(4)
+            }
+            else {
+                Image(systemName: "arrow.up.forward.app.fill")
+                    .resizable()
+                    .foregroundColor(secondaryFontColor)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 24, height: 24, alignment: .center)
             }
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
         .background(
-            Color(.systemGray5)
+            Rectangle()
+                .foregroundColor(backgroundColor)
         )
+        .cornerRadius(12)
     }
     
     @ViewBuilder
@@ -100,14 +114,6 @@ struct LinkPreviewDesign: View {
                 }
             }
             HStack(spacing: 8){
-                if image == nil && icon == nil {
-                    Image(systemName: "arrow.up.forward.app.fill")
-                        .resizable()
-                        .foregroundColor(.gray)
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24, height: 24, alignment: .center)
-                }
-                
             VStack(alignment: .leading, spacing: 0){
                 if let title = metaData.title {
                     Text(title)
@@ -128,6 +134,13 @@ struct LinkPreviewDesign: View {
                 
                 if image != nil {
                     Spacer()
+                }
+                else {
+                    Image(systemName: "arrow.up.forward.app.fill")
+                        .resizable()
+                        .foregroundColor(secondaryFontColor)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24, height: 24, alignment: .center)
                 }
             }
             .padding(.horizontal, 12)
