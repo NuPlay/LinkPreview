@@ -37,16 +37,17 @@ public struct LinkPreview: View {
             else {
                 HStack(spacing: 10){
                     ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: .gray))
+                        .progressViewStyle(CircularProgressViewStyle(tint: secondaryFontColor))
                     
                     Text(url.host ?? "")
                         .font(.caption)
+                        .foregroundColor(primaryFontColor)
                 }
                 .padding(.horizontal, 12)
                 .padding(.vertical, 6)
                 .background(
                     Capsule()
-                        .foregroundColor(Color(.systemGray5))
+                        .foregroundColor(backgroundColor)
                 )
                 .onAppear(perform: {
                     getMetaData(url: url)
