@@ -43,6 +43,7 @@ struct LinkPreview_Test: View {
                     LinkPreview(url: URL(string: "https://github.com/NuPlay/ExpandableText"))
                         .titleLineLimit(20)
                         .frame(width: size, alignment: .center)
+                        .type(.small)
                     
                     LinkPreview(url: URL(string: "https://github.com/NuPlay/SwiftUI-SlideText"))
                 }
@@ -65,3 +66,4 @@ Modifier | Default
 `.primaryFontColor(_ primaryFontColor: Color)` | `.primary`
 `.secondaryFontColor(_ secondaryFontColor: Color)` | `.gray`
 `.titleLineLimit(_ titleLineLimit: Int)` | `3`
+`.type(_ type: LinkPreviewType(customType[.large, .small, .auto]))` | `.auto`
