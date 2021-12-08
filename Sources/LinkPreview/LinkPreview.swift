@@ -9,8 +9,9 @@ public struct LinkPreview: View {
     
     var backgroundColor: Color = Color(.systemGray5)
     var primaryFontColor: Color = .primary
-    var secondaryFontColor: Color = .gray
+    var secondaryFontColor: Color = .secondary
     var titleLineLimit: Int = 3
+    var type: LinkPreviewType = .auto
     
     public init(url: URL?) {
         self.url = url
@@ -24,7 +25,7 @@ public struct LinkPreview: View {
                         self.isPresented.toggle()
                     }
                 }, label: {
-                    LinkPreviewDesign(metaData: metaData, type: .auto, backgroundColor: backgroundColor, primaryFontColor: primaryFontColor, secondaryFontColor: secondaryFontColor, titleLineLimit: titleLineLimit)
+                    LinkPreviewDesign(metaData: metaData, type: type, backgroundColor: backgroundColor, primaryFontColor: primaryFontColor, secondaryFontColor: secondaryFontColor, titleLineLimit: titleLineLimit)
                 })
                     .buttonStyle(LinkButton())
                     .fullScreenCover(isPresented: $isPresented) {

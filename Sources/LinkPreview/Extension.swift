@@ -35,4 +35,11 @@ extension LinkPreview {
         result.titleLineLimit = titleLineLimit
         return result
     }
+    
+    public func type(_ type: LinkPreviewType) -> LinkPreview {
+        var result = self
+        
+        result.type = type
+        return result
+    }
 }
