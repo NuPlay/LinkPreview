@@ -87,3 +87,34 @@ struct LinkButton: ButtonStyle {
             .animation(.spring(), value: configuration.isPressed)
     }
 }
+
+struct LinkPreview_Test: PreviewProvider {
+    @State static var size: CGFloat = 350.0
+
+    static var previews: some View {
+        ZStack(alignment: .bottom) {
+            ScrollView {
+                VStack {
+                    LinkPreview(url: URL(string: "https://github.com/NuPlay/RichText"))
+                        .backgroundColor(.blue)
+                        .primaryFontColor(.white)
+                        .secondaryFontColor(.white.opacity(0.6))
+                        .titleLineLimit(3)
+                        .frame(width: size, alignment: .center)
+
+                    LinkPreview(url: URL(string: "https://github.com/NuPlay/ExpandableText"))
+                        .titleLineLimit(20)
+                        .type(.small)
+                        .frame(width: size, alignment: .center)
+
+                    LinkPreview(url: URL(string: "https://github.com/NuPlay/SwiftUI-SlideText"))
+                }
+                .padding(.horizontal, 24)
+            }
+
+            Slider(value: $size , in: 100...400, step: 1)
+                .padding(.horizontal, 24)
+        }
+    }
+}
+
